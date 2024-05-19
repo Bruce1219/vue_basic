@@ -9,13 +9,17 @@
             
         }
         .cart{
-            width: 100%;
+            width: 80%;
+            margin: 50px auto;
+        }
+        .cart h1{
+            text-align: center;
         }
         .list{
             width: 100%;
         }
         .item{
-            width: 80%;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -29,10 +33,28 @@
         .pic img{
             width: 100%;
         }
-        .input button{
-            margin: 10px;
+        .name{
+            text-align: center;
         }
-
+        .input button{
+            margin: 5px;
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+        }
+        .delete button{
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            color: red;
+        }
+        .total{
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -60,26 +82,9 @@
                         <button>X</button>
                     </div>
                 </div>
-                <!-- <div class="item">
-                    <div class="pic">
-                        <img :src="carList[1]['img']" alt="">
-                    </div>
-                    <div class="name">
-                        <h3>{{carList[1]['name']}}</h3>
-                        <p>{{carList[1]['subTitle']}}</p>
-                    </div>
-                    <div class="price">
-                        <span>NT${{carList[1]['price']}}</span>
-                    </div>
-                    <div class="input">
-                        <button @click="reduce(1)">-</button>
-                        <span>{{carList[1]['count']}}</span>
-                        <button @click="add(1)">+</button>
-                    </div>
-                    <div class="delete">
-                        <button>X</button>
-                    </div>
-                </div> -->
+                <div class="total">
+                    Total: NT$ {{total}}
+                </div>
             </div>
         </div>
         <div class="form"></div>
@@ -110,6 +115,19 @@
                             img:"image/03.jpg"
                         }
                     ]
+                }
+            },
+            computed:{
+                total(){
+                    //想法
+                    // const prod1 = this.carList[0]['price'] * this.carList[0]['count']
+                    // const prod2 = this.carList[1]['price'] * this.carList[1]['count']
+                    // return prod1 + prod2
+                    let price = 0
+                    for (let index = 0; index < this.carList.length; index++) {
+                        price += (this.carList[index]['price'] * this.carList[index]['count'])
+                    }
+                    return price
                 }
             },
             methods:{

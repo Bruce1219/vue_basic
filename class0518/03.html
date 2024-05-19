@@ -10,8 +10,8 @@
         <button @click="reduce">-</button>
         {{res}}
         <button @click="add">+</button><br>
-        總價:{{parse()}}<br>
-        美元:{{paseDollar()}}
+        總價:{{parse}}<br>
+        美元:{{dollar}}
     </div>
     <!-- <script src="https://unpkg.com/vue"></script> -->
 
@@ -23,10 +23,15 @@
                 return {
                     res:0,
                     count:1,
-                    price:10,
-                    total:0,
-                    dollar:0
-                    
+                    price:100
+                }
+            },
+            computed:{
+                parse(){
+                    return this.price * this.res
+                },
+                dollar(){
+                    return this.parse / 30
                 }
             },
             methods:{
@@ -39,18 +44,6 @@
                     // this.res = this.res - 1
                     if(this.res <= 0) return
                     this.res -= this.count
-                },
-                parse(){
-                    //not good 寫法
-                    // return 100 * this.res
-                    this.total = this.price * this.res
-                    return this.total
-                },
-                paseDollar(){
-                    //not good 寫法
-                    // return 3000 * this.res
-                    this.dollar = this.total * 30
-                    return this.dollar
                 }
             },
         }).mount("#app")
