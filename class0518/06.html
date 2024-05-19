@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app{
+            
+        }
+        .cart{
+            width: 100%;
+        }
+        .list{
+            width: 100%;
+        }
+        .item{
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .pic{
+            width: 200px;
+            height: 150px;
+            overflow: hidden;
+        }
+        .pic img{
+            width: 100%;
+        }
+        .input button{
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="cart">
+            <h1>Shoping Cart</h1>
+            <div class="list">
+                <div class="item">
+                    <div class="pic">
+                        <img :src="carList[0]['img']" alt="">
+                    </div>
+                    <div class="name">
+                        <h3>{{carList[0]['name']}}</h3>
+                        <p>{{carList[0]['subTitle']}}</p>
+                    </div>
+                    <div class="price">
+                        <span>NT${{carList[0]['price']}}</span>
+                    </div>
+                    <div class="input">
+                        <button @click="reduce(0)">-</button>
+                        <span>{{carList[0]['count']}}</span>
+                        <button @click="add(0)">+</button>
+                    </div>
+                    <div class="delete">
+                        <button>X</button>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="pic">
+                        <img :src="carList[1]['img']" alt="">
+                    </div>
+                    <div class="name">
+                        <h3>{{carList[1]['name']}}</h3>
+                        <p>{{carList[1]['subTitle']}}</p>
+                    </div>
+                    <div class="price">
+                        <span>NT${{carList[1]['price']}}</span>
+                    </div>
+                    <div class="input">
+                        <button @click="reduce(1)">-</button>
+                        <span>{{carList[1]['count']}}</span>
+                        <button @click="add(1)">+</button>
+                    </div>
+                    <div class="delete">
+                        <button>X</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form"></div>
+    </div>
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+
+    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.js"></script>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    carList:[
+                        {
+                            id:1,
+                            name:'起司牛肉堡',
+                            subTitle:'Cheese Burger',
+                            price:'150',
+                            count:1,
+                            img:"image/02.jpg"
+                        },
+                        {
+                            id:2,
+                            name:'冰焦糖奶茶',
+                            subTitle:'Milk Tea',
+                            price:'100',
+                            count:1,
+                            img:"image/03.jpg"
+                        }
+                    ]
+                }
+            },
+            methods:{
+                add(index){
+                    this.carList[index]['count'] += 1
+                },
+                reduce(index){
+                    if(this.carList[index]['count'] == 0) return
+                    this.carList[index]['count'] -= 1
+                }
+            },
+        }).mount("#app")
+    </script>
+</body>
+</html>
